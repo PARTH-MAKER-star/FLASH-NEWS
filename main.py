@@ -3,15 +3,12 @@ import httpx
 from fastapi import FastAPI, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 
-# ----------------------------------------------------------
-# 🔑 Replace this with your actual Twitter API Bearer Token
-# ----------------------------------------------------------
-BEARER_TOKEN = "YOUR_TWITTER_BEARER_TOKEN"
+# Replace with your actual Twitter API token
+BEARER_TOKEN = "1985961754921209856kh57977185"
 TWITTER_STREAM_URL = "https://api.twitter.com/2/tweets/search/stream"
 
 app = FastAPI()
 
-# Allow dashboard or any frontend to connect
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -20,7 +17,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ---- Stream tweets in realtime ----
 async def get_twitter_stream():
     headers = {"Authorization": f"Bearer {BEARER_TOKEN}"}
     async with httpx.AsyncClient(timeout=None) as client:
@@ -40,4 +36,4 @@ async def websocket_endpoint(websocket: WebSocket):
 
 @app.get("/")
 def root():
-    return {"message": "✅ Fast Twitter Stream is running!"}
+    return {"message": "⚡ FLASH NEWS backend is live!"}
